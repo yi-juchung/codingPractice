@@ -1,19 +1,26 @@
-public class MinDepth {
+public class isBalanced {
 
-    static public int minDepth(TreeNode root) {
+    static public boolean isBalanced(TreeNode root) {
+        return isBalancedHelper(root) != -1;
+    }
+
+    static public int isBalancedHelper(TreeNode root) {
         if (root == null) {
             return 0;
         }
 
-        if (root.left == null && root.right == null) {
-            return 1;
-        } else if (root.left == null) {
-            return minDepth(root.right)+1;
-        } else if (root.right == null) {
-            return minDepth(root.left)+1;
-        } else {
-            return Math.min(minDepth(root.left), minDepth(root.right))+1;
+        int left = isBalancedHelper(root.left);
+        int right = isBalancedHelper(root.right);
+
+        if (left == -1 || right == -1) {
+            return -1;
         }
+
+        if (Math.abs(left-right) > 1 ) {
+            return -1;
+        }
+
+        return Math.max(left,right)+1;
     }
 
     public static void main(String [ ] args) {
@@ -29,6 +36,6 @@ public class MinDepth {
         root.right.right = new TreeNode(4);
         root.right.right.right = new TreeNode(1);
 
-        System.out.print(minDepth(root));
+        System.out.print(isBalanced(root));
     }
 }
