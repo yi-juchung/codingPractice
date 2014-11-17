@@ -2,9 +2,9 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
 
-public class LevelOrderBottom {
+public class LevelOrder {
 
-    static public List<List<Integer>> levelOrderBottom(TreeNode root) {
+    static public List<List<Integer>> levelOrder(TreeNode root) {
 
         List<List<Integer>> res = new LinkedList<List<Integer>>();
 
@@ -29,7 +29,7 @@ public class LevelOrderBottom {
                 curList.add(curNode.val);
             }
 
-            res.add(0, curList);
+            res.add(curList);
             curQueue = nextQueue;
         }
 
@@ -49,6 +49,6 @@ public class LevelOrderBottom {
         root.right.right = new TreeNode(4);
         root.right.right.right = new TreeNode(1);
 
-        System.out.print(levelOrderBottom(root));
+        System.out.print(levelOrder(root));
     }
 }
