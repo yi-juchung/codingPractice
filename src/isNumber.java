@@ -10,6 +10,9 @@
 "3e" => false
 "0.." => false
 "0e" => false
+"-0." => true
+"-01" => true
+"+.8" => true
  */
 
 public class isNumber {
@@ -30,13 +33,9 @@ public class isNumber {
 
                 return checkParts(parts, 'e');
             } else {
-                return isNumberHelper(s);
+                return checkFirstPart(s);
             }
         }
-    }
-
-    static public boolean firstPart(String firstPart) {
-
     }
 
     static public boolean checkParts(String [] parts, char spliter) {
@@ -53,30 +52,35 @@ public class isNumber {
             }
         } else if (parts[1].length() < 1) {
             if (spliter == '.') {
-                return isNumberHelper(parts[0]);
+                return checkFirstPart(parts[0]);
             } else {
                 return false;
             }
         } else {
-            int nextIdx = 0;
+            return checkFirstPart(parts[0]) && isNumberHelper(parts[1]);
+        }
+    }
 
-            while(nextIdx < parts[0].length()) {
-                char nextChar = parts[0].charAt(nextIdx);
-                if (nextChar == '+' || nextChar == '-')
-                    nextIdx++;
-                else
-                    break;
-            }
+    static public boolean checkFirstPart(String s) {
+        int nextIdx = 0;
 
-            if (nextIdx < parts[0].length()) {
-                if (parts[0].charAt(nextIdx) == '0' && nextIdx+1 == parts[0].length() ) {
-                    return isNumberHelper(parts[1]);
-                } else {
-                    return isNumberHelper(parts[0]) && isNumberHelper(parts[1]);
-                }
-            } else {
-                return false;
-            }
+        boolean firstOccur = false;
+        while(nextIdx < s.length()) {
+            char nextChar = s.charAt(nextIdx);
+            if (nextChar == '+' || nextChar == '-') {
+                nextIdx++;
+                if (firstOccur) {
+                    return false;
+                } else
+                    firstOccur = true;
+            } else
+                break;
+        }
+
+        if (nextIdx < s.length()) {
+            return isNumberHelper(s.substring(nextIdx));
+        } else {
+            return isNumberHelper(s);
         }
     }
 
@@ -92,6 +96,6 @@ public class isNumber {
     }
 
     public static void main(String [ ] args) {
-        System.out.print(isNumber("0e"));
+        System.out.print(isNumber("-1."));
     }
 }
