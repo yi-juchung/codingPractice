@@ -4,31 +4,56 @@ import java.util.Queue;
 
 public class CloneGraph {
     static public UndirectedGraphNode cloneGraph(UndirectedGraphNode node) {
-        String serialized = serializeGraph(node);
+        if (node == null) {
+            return null;
+        }
+        HashMap<Integer,UndirectedGraphNode> newNodeMap = new HashMap<Integer, UndirectedGraphNode>();
 
-        return deSerializeGraph(serialized);
-    }
+        Queue<UndirectedGraphNode> oldNodeQueue = new LinkedList<UndirectedGraphNode>();
+        oldNodeQueue.add(node);
 
-    static public String serializeGraph(UndirectedGraphNode node) {
-        StringBuilder sb = new StringBuilder();
-        sb.append('{');
-        Queue<UndirectedGraphNode> pendingNodes = new LinkedList<UndirectedGraphNode>();
-        pendingNodes.add(node);
+        UndirectedGraphNode newRootNode = new UndirectedGraphNode(node.label);
+        newNodeMap.put(node.label, newRootNode);
 
-        while(!pendingNodes.isEmpty()) {
-            UndirectedGraphNode curNode = pendingNodes.poll();
-            sb.append(curNode.label);
+        while (!oldNodeQueue.isEmpty()) {
+            UndirectedGraphNode curNode = oldNodeQueue.poll();
+            UndirectedGraphNode newNode = null;
+
+            if (!newNodeMap.containsKey(curNode.label)) {
+                newNode = new UndirectedGraphNode(curNode.label);
+                newNodeMap.put(curNode.label, newNode);
+            } else {
+                newNode = newNodeMap.get(curNode.label);
+            }
+
+            for (UndirectedGraphNode neighbor : curNode.neighbors) {
+                UndirectedGraphNode newNeighbor = null;
+                if (newNodeMap.containsKey(neighbor.label)) {
+                    newNeighbor = newNodeMap.get(neighbor.label);
+                } else {
+                    newNeighbor = new UndirectedGraphNode(neighbor.label);
+                    newNodeMap.put(neighbor.label, newNeighbor);
+                    oldNodeQueue.add(neighbor);
+                }
+                newNode.neighbors.add(newNeighbor);
+            }
         }
 
-        sb.append('}');
-        return sb.toString();
-    }
-
-    static public UndirectedGraphNode deSerializeGraph(String serialized) {
-
+        return newRootNode;
     }
 
     public static void main(String [ ] args) {
-        System.out.print(UndirectedGraphNode("LXXXVIII"));
+        UndirectedGraphNode rootNode = new UndirectedGraphNode(0);
+        UndirectedGraphNode node1 = new UndirectedGraphNode(1);
+        UndirectedGraphNode node2 = new UndirectedGraphNode(2);
+
+        rootNode.neighbors.add(node1);
+        rootNode.neighbors.add(node2);
+        node1.neighbors.add(node2);
+        node2.neighbors.add(node2);
+
+        UndirectedGraphNode cloned = cloneGraph(rootNode);
+
+        System.out.print("123");
     }
 }
