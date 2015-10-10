@@ -1,4 +1,3 @@
-import java.util.List;
 
 public class MergeTwoLists {
     static public ListNode mergeTwoLists(ListNode l1, ListNode l2) {

@@ -6,19 +6,35 @@ public class Triangle {
         if (triangle.size() == 0) {
             return 0;
         }
+
         int rowNum = triangle.size();
         int [] res = new int[rowNum];
+
         for (int i=0;i<triangle.get(rowNum-1).size();i++) {
             res[i] = triangle.get(rowNum-1).get(i);
         }
 
-        for (int row=rowNum-2;row >= 0;row--) {
-            for (int col=0;col <= row;col++) {
+        for (int row = rowNum-1;row>=0;row--) {
+            for (int col = 0;col<=row;col++) {
                 res[col] = Math.min(res[col],res[col+1])+triangle.get(row).get(col);
             }
         }
 
         return res[0];
+
+//        int rowNum = triangle.size();
+//        int [] res = new int[rowNum];
+//        for (int i=0;i<triangle.get(rowNum-1).size();i++) {
+//            res[i] = triangle.get(rowNum-1).get(i);
+//        }
+//
+//        for (int row=rowNum-2;row >= 0;row--) {
+//            for (int col=0;col <= row;col++) {
+//                res[col] = Math.min(res[col],res[col+1])+triangle.get(row).get(col);
+//            }
+//        }
+
+        //return res[0];
     }
 
     public static void main(String [ ] args) {
