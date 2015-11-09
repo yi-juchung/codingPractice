@@ -1,3 +1,8 @@
+import javafx.util.Pair;
+
+import java.util.LinkedList;
+import java.util.Queue;
+
 public class NumberofIslands {
     static public int numIslands(char[][] grid) {
         boolean [][] checked = new boolean[grid.length][grid[0].length];
@@ -7,12 +12,45 @@ public class NumberofIslands {
             for(int j=0;j<grid[0].length;j++) {
                 if (grid[i][j] == '1' && !checked[i][j]) {
                     count++;
-                    fill(grid,i,j, checked);
+                    fillIterative(grid, i, j, checked);
                 }
             }
         }
 
         return count;
+    }
+
+    static public void fillIterative(char [][] grid, int i, int j, boolean [][] checked) {
+        Queue<Pair<Integer,Integer>> next = new LinkedList<Pair<Integer, Integer>>();
+
+        next.add(new Pair<Integer, Integer>(i,j));
+
+        while (!next.isEmpty()) {
+            Pair<Integer,Integer> cur = next.poll();
+            int curI = cur.getKey();
+            int curJ = cur.getValue();
+
+            if (checked[curI][curJ]) {
+                continue;
+            }
+
+            checked[curI][curJ] = true;
+
+            if (grid[curI][curJ] == '1') {
+                if (curI > 0) {
+                    next.add(new Pair<Integer, Integer>(curI-1,curJ));
+                }
+                if (curJ > 0) {
+                    next.add(new Pair<Integer, Integer>(curI,curJ-1));
+                }
+                if (curI < grid.length-1) {
+                    next.add(new Pair<Integer, Integer>(curI+1,curJ));
+                }
+                if (curJ < grid[0].length-1) {
+                    next.add(new Pair<Integer, Integer>(curI,curJ+1));
+                }
+            }
+        }
     }
 
     static public void fill(char[][] grid, int i, int j, boolean[][] checked) {

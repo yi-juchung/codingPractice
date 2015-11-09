@@ -2,6 +2,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TextJustification {
+
     static public List<String> fullJustify(String[] words, int width) {
         List<String> res = new ArrayList<String>();
         if (words == null || words.length == 0)
