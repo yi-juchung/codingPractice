@@ -6,15 +6,27 @@ public class PaintFence {
         }
 
         int same = k;
-        int diff1 = k;
-        int diff2 = k*(k-1);
-        for (int i = 2;i<n;i++) {
-            same = diff2;
-            diff2 = (k-1)*(diff1+diff2);
-            diff1 = same;
+        int diff = k*(k-1);
+        for (int i=2;i<n;i++) {
+            int sameNext = diff;
+            int diffNext = (k-1)*(same+diff);
+
+            same = sameNext;
+            diff = diffNext;
         }
 
-        return same+diff2;
+        return same+diff;
+
+//        int same = k;
+//        int diff1 = k;
+//        int diff2 = k*(k-1);
+//        for (int i = 2;i<n;i++) {
+//            same = diff2;
+//            diff2 = (k-1)*(diff1+diff2);
+//            diff1 = same;
+//        }
+//
+//        return same+diff2;
     }
 
     public static void main(String [ ] args) {
