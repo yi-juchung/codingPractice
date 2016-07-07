@@ -17,7 +17,7 @@ public class BinaryTreeRightSideView {
             return;
 
         curMap.put(dep, cur.val);
-        helper(curMap, cur.left, dep + 1);
+        helper(curMap, cur.left, dep+1);
         helper(curMap, cur.right, dep+1);
     }
 

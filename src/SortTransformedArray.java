@@ -5,11 +5,36 @@ public class SortTransformedArray {
         int i = 0;
         int j = nums.length-1;
 
-        if (a > 0) {
+        int resIdx = (a>=0)?nums.length-1:0;
 
-        } else {
+        while (i<=j) {
+            int api = apply(nums[i],a,b,c);
+            int apj = apply(nums[j],a,b,c);
 
+            if (a >= 0) {
+                if (api > apj) {
+                    res[resIdx--] = api;
+                    i++;
+                } else {
+                    res[resIdx--] = apj;
+                    j--;
+                }
+            } else {
+                if (api > apj) {
+                    res[resIdx++] = apj;
+                    j--;
+                } else {
+                    res[resIdx++] = api;
+                    i++;
+                }
+            }
         }
+
+        return res;
+    }
+
+    static public int apply (int x, int a, int b, int c) {
+        return a*x*x+b*x+c;
     }
 
     public static void main(String [ ] args) {
