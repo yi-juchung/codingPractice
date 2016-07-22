@@ -14,7 +14,9 @@ public class WordBreakII {
 
     static public void helper (String s, int start, Set<String> dict, boolean [] noSol, List<String> res, String cur) {
         if (start == s.length()) {
-            res.add(cur.substring(1));
+            if (cur.length() > 0) {
+                res.add(cur.substring(1));
+            }
             return;
         }
 
