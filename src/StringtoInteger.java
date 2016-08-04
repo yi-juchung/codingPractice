@@ -57,8 +57,13 @@ public class StringtoInteger {
 
     public static void main(String [ ] args) {
 
-        System.out.print(myAtoi("    10522545459"));
+        System.out.println(myAtoi("    10522545459"));
 
-        System.out.print(myAtoi("-2147483647"));
+        System.out.println(myAtoi("-2147483647"));
+        System.out.println(myAtoi("-2147483648"));
+        System.out.println(myAtoi("-2147483649"));
+        System.out.println(myAtoi("2147483648"));
+        System.out.println(myAtoi("2147483647"));
+        System.out.println(myAtoi("2147483646"));
     }
 }

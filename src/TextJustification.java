@@ -10,34 +10,30 @@ public class TextJustification {
         int count = 0;
         int last = 0;
         for(int i=0;i<words.length;i++) {
-            if(count+words[i].length()+(i-last)>width)
-            {
+            if(count+words[i].length()+(i-last) > width) {
                 int spaceNum = 0;
                 int extraNum = 0;
-                if(i-last-1>0)
-                {
+                if(i-last-1>0) {
                     spaceNum = (width-count)/(i-last-1);
                     extraNum = (width-count)%(i-last-1);
                 }
+
                 StringBuilder str = new StringBuilder();
-                for(int j=last;j<i;j++)
-                {
+                for(int j=last;j<i;j++) {
                     str.append(words[j]);
-                    if(j<i-1)
-                    {
-                        for(int k=0;k<spaceNum;k++)
-                        {
+                    if(j<i-1) {
+                        for(int k=0;k<spaceNum;k++) {
                             str.append(" ");
                         }
-                        if(extraNum>0)
-                        {
+
+                        if(extraNum>0) {
                             str.append(" ");
                         }
                         extraNum--;
                     }
                 }
-                for(int j=str.length();j<width;j++)
-                {
+
+                for(int j=str.length();j<width;j++) {
                     str.append(" ");
                 }
                 res.add(str.toString());
@@ -117,15 +113,15 @@ public class TextJustification {
 //    }
 
     public static void main(String [ ] args) {
-//        String [] input = new String[] {
-//                "This", "is", "an", "example", "of", "text", "justification."
-//        };
-
         String [] input = new String[] {
-                "a","b","c","d","e"
+                "This", "is", "an", "example", "of", "text", "justification."
         };
 
-        for (String s : fullJustify(input,3)) {
+//        String [] input = new String[] {
+//                "a","b","c","d","e"
+//        };
+
+        for (String s : fullJustify(input,10)) {
             System.out.println(s);
         }
     }

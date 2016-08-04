@@ -44,8 +44,8 @@ public class KthLargestElementinanArray {
 
     public static void main(String [ ] args) {
 
-//        int [] num = new int[] {3,2,1,5,6,4};
-        int [] num = new int[] {1};
-        System.out.print(findKthLargest(num, 1));
+        int [] num = new int[] {3,2,1,5,6,4};
+//        int [] num = new int[] {1};
+        System.out.print(findKthLargest(num, 3));
     }
 }

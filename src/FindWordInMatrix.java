@@ -53,13 +53,14 @@ public class FindWordInMatrix {
         char [][] m = new char [][] {
                 {'d','b','c','d','e'},
                 {'a','o','c','d','e'},
-                {'a','b','g','d','e'},
+                {'e','b','g','d','e'},
                 {'a','b','c','d','e'},
                 {'a','b','c','d','e'}
         };
 
         Set<String> dict = new HashSet<>();
         dict.add("god");
+        dict.add("be");
 
         for (String s : findWord(m,dict)) {
             System.out.println(s);

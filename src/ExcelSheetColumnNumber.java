@@ -4,10 +4,11 @@ public class ExcelSheetColumnNumber {
         long res = 0;
         boolean overflow = false;
         for (char c : chars) {
-            res += c-64;
+            res += c-'A'+1;
 
             if (res*26 > Integer.MAX_VALUE) {
                 overflow = true;
+                break;
             } else {
                 res *= 26;
             }
@@ -17,6 +18,9 @@ public class ExcelSheetColumnNumber {
     }
 
     public static void main(String [ ] args) {
-        System.out.print(titleToNumber("CFDGSXM"));
+
+        System.out.println(titleToNumber("CFDGSXM"));
+        System.out.println(titleToNumber("AAC"));
+        System.out.println(titleToNumber("A"));
     }
 }

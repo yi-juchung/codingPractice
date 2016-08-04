@@ -37,6 +37,6 @@ public class DivideTwoIntegers {
     public static void main(String [ ] args) {
         // -2147483648, -1
 
-        System.out.println(divide(-2147483648,-1));
+        System.out.println(divide(10,3));
     }
 }
